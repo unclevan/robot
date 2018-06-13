@@ -30,7 +30,7 @@ public class CreateCookieService {
 
 
     public void login(String username, String password) throws Exception {
-        System.setProperty("webdriver.chrome.driver", "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.bak");
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().pageLoadTimeout(12000, TimeUnit.SECONDS);
         Selenium selenium = new WebDriverBackedSelenium(driver, "http://zjjzzgl.zjsgat.gov.cn:9090");
