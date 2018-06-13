@@ -32,6 +32,7 @@ public class SubmitService {
         conn2.header("Host", "zjjzzgl.zjsgat.gov.cn:9090");
         conn2.header("Referer", "http://zjjzzgl.zjsgat.gov.cn:9090/zahlw/userInfo");
         conn2.header("User-Agent", "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; MALC)");
+        //TODO 此处需要读取登录时保存的cookie信息
         conn2.header("Cookie", "jcsid=1c9f7c30-aaee-4ed9-9219-8e9feeba3ba8;JSESSIONID=DA7BFB5D234B6DE50144F3FA9E127582;_version_key=3301;");
         Connection.Response response2 = conn2.ignoreContentType(true).method(Connection.Method.GET).execute();
         System.out.println(response2.body());
@@ -89,6 +90,7 @@ public class SubmitService {
         conn.header("Host", "zjjzzgl.zjsgat.gov.cn:9090");
         conn.header("Referer", "http://zjjzzgl.zjsgat.gov.cn:9090/zahlw/userInfo");
         conn.header("User-Agent", "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; MALC)");
+        //TODO 此处需要读取登录时保存的cookie信息
         conn.header("Cookie", "JSESSIONID=DCD62FE8962D4F2E1F8E1C6EBACC75FB; _version_key=3301; jcsid=21621805-314e-4984-8596-8de90130fde8");
         Connection.Response response1 = conn.ignoreContentType(true).method(Connection.Method.POST).data(map).execute();
         System.out.println(response1.body());
