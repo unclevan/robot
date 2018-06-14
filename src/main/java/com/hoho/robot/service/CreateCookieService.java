@@ -1,5 +1,6 @@
 package com.hoho.robot.service;
 
+import com.hoho.robot.util.VercodeUtil;
 import com.thoughtworks.selenium.Selenium;
 import com.thoughtworks.selenium.webdriven.WebDriverBackedSelenium;
 import org.apache.commons.io.FileUtils;
@@ -59,9 +60,12 @@ public class CreateCookieService {
         File screenshotLocation = new File(name);
         FileUtils.copyFile(screenshot, screenshotLocation);
         //TODO 这里是模拟人工识别测试,该处需要调用识别工具对文件进行识别
-        Scanner in = new Scanner(System.in);
-        String captcha = in.nextLine();
+//        Scanner in = new Scanner(System.in);
+//        String captcha = in.nextLine();
+        String captcha = VercodeUtil.crackVercode(screenshotLocation);
+        System.out.println("captcha:" + captcha);
         vcodeInput.sendKeys(captcha);
+
         //登录
         WebElement loginBtn = driver.findElement(By.className("col-md-6"));
         loginBtn.click();
