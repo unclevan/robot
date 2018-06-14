@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -61,11 +62,14 @@ public class SubmitController {
                          @ApiParam(value = "ldhtqk") @RequestParam(name = "ldhtqk", required = false) String ldhtqk
 
     ) {
-        Map<String, String> map = null;
+        Map<String, String> map = new HashMap<>();
         try {
             submitService.exceute();
+            map.put("msg", "ok");
         } catch (Exception e) {
             e.printStackTrace();
+            map.put("errorinfo", e.getMessage());
+
         }
         return map;
     }

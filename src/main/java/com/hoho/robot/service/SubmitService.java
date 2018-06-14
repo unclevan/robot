@@ -4,6 +4,7 @@ import lombok.Cleanup;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
@@ -32,9 +33,9 @@ public class SubmitService {
         conn2.header("Referer", "http://zjjzzgl.zjsgat.gov.cn:9090/zahlw/userInfo");
         conn2.header("User-Agent", "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; MALC)");
         //TODO 此处需要读取登录时保存的cookie信息
-        conn2.header("Cookie", getCookiesFromFile("15268132137"));
+        conn2.header("Cookie", getCookiesFromFile("蔡马人家社区"));
         Connection.Response response2 = conn2.ignoreContentType(true).method(Connection.Method.GET).execute();
-        System.out.println(response2.body());
+//        System.out.println(response2.body());
         Document doc = Jsoup.parse(response2.body());
         Elements csrfToken = doc.select("input[type=\"hidden\"]input[name=\"CSRFToken\"]");
         Elements token = doc.select("input[type=\"hidden\"]input[name=\"com.zjjcnt.core.web.taglib.form.TOKEN\"]");
@@ -51,9 +52,9 @@ public class SubmitService {
         map.put("sblx", "1");
         map.put("zxbz", "0");
         map.put("sourcePath", "/zahlw/ZzsbtLdrk/saveSuccess");
-        map.put("xm", "樊斌");
+        map.put("xm", "斌斌冯");
         map.put("xb", "1");
-        map.put("sfzh", "330822199211170931");
+        map.put("sfzh", "110101200006012613");
         map.put("lxdh", "15268132137");
         map.put("hksx", "330822");
         map.put("hkxz", "華西村");
@@ -90,9 +91,38 @@ public class SubmitService {
         conn.header("Referer", "http://zjjzzgl.zjsgat.gov.cn:9090/zahlw/userInfo");
         conn.header("User-Agent", "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; MALC)");
         //TODO 此处需要读取登录时保存的cookie信息
-        conn.header("Cookie", getCookiesFromFile("15268132137"));
+        conn.header("Cookie", getCookiesFromFile("蔡马人家社区"));
         Connection.Response response1 = conn.ignoreContentType(true).method(Connection.Method.POST).data(map).execute();
         System.out.println(response1.body());
+        Document doc1 = Jsoup.parse(response1.body());
+        Elements success1 = doc1.select("h4[class=\"block\"]");
+        Elements success2 = doc1.select("h5[class=\"block\"]");
+        Elements success3 = doc1.select("p[style=\"font-size: 14px; line-height: 25px;\"]");
+        Elements success4 = doc1.select("div[id=\"formValidationErrorsId319010\"]");
+
+        String succ = "<h4 class=\"block\">操作成功！</h4>";
+
+
+        if (success1 != null && success1.first() != null) {
+            System.out.println(success1.first().toString());
+            if (!succ.equals(success1.first().toString())) {
+                throw new Exception("提交失败！");
+            }
+        }else{
+            throw new Exception("提交失败！");
+        }
+//        if (success2 != null && success2.first() != null) {
+//            System.out.println(success2.first().toString());
+//            System.out.println(success2.first().text());
+//        }
+//        if (success3 != null && success3.first() != null) {
+//            System.out.println(success3.first().toString());
+//            System.out.println(success3.first().text());
+//        }
+//        if (success4 != null ) {
+//            System.out.println(success4.toString());
+//            System.out.println(success4.text());
+//        }
 
     }
 
