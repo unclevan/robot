@@ -1,8 +1,10 @@
 package com.hoho.robot.web;
 
+import com.hoho.robot.service.CreateCookieService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,12 +21,21 @@ import java.util.Map;
 @Api(value = "login", tags = "login", description = "login")
 public class LoginController {
 
+    @Autowired
+    private CreateCookieService createCookieService;
+
     @PostMapping(value = "/createCookie")
     @ApiOperation(value = "登录", httpMethod = "POST", response = Map.class)
     public Map detail(@ApiParam(value = "用户名") @RequestParam(name = "username", required = false) String username,
                       @ApiParam(value = "密码") @RequestParam(name = "password", required = false) String password
     ) {
-        return null;
+        Map<String, String> map = null;
+        try {
+            map = createCookieService.login(username, password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return map;
     }
 
 }

@@ -6,11 +6,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +16,7 @@ import java.util.Map;
  * Created by wanlf on 2018/6/13
  * email:wanlongfei007@gmail.com
  */
+@Service
 public class SubmitService {
 
     public void exceute() throws Exception {
@@ -33,7 +32,7 @@ public class SubmitService {
         conn2.header("Referer", "http://zjjzzgl.zjsgat.gov.cn:9090/zahlw/userInfo");
         conn2.header("User-Agent", "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; MALC)");
         //TODO 此处需要读取登录时保存的cookie信息
-        conn2.header("Cookie", "jcsid=1c9f7c30-aaee-4ed9-9219-8e9feeba3ba8;JSESSIONID=DA7BFB5D234B6DE50144F3FA9E127582;_version_key=3301;");
+        conn2.header("Cookie", getCookiesFromFile("15268132137"));
         Connection.Response response2 = conn2.ignoreContentType(true).method(Connection.Method.GET).execute();
         System.out.println(response2.body());
         Document doc = Jsoup.parse(response2.body());
@@ -91,7 +90,7 @@ public class SubmitService {
         conn.header("Referer", "http://zjjzzgl.zjsgat.gov.cn:9090/zahlw/userInfo");
         conn.header("User-Agent", "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; MALC)");
         //TODO 此处需要读取登录时保存的cookie信息
-        conn.header("Cookie", "JSESSIONID=DCD62FE8962D4F2E1F8E1C6EBACC75FB; _version_key=3301; jcsid=21621805-314e-4984-8596-8de90130fde8");
+        conn.header("Cookie", getCookiesFromFile("15268132137"));
         Connection.Response response1 = conn.ignoreContentType(true).method(Connection.Method.POST).data(map).execute();
         System.out.println(response1.body());
 
@@ -118,6 +117,27 @@ public class SubmitService {
             e.printStackTrace();
         }
         return sb.toString();
+    }
+
+    /**
+     * 读取Cookie
+     *
+     * @return
+     */
+    public static String getCookiesFromFile(String username) {
+        //讀取所有cookie文件
+        File file = new File("D:\\vcode\\cookie\\" + username + ".txt");
+        String c = null;
+        try {
+            @Cleanup FileReader fileReader = new FileReader(file);
+            @Cleanup BufferedReader bufferedReader = new BufferedReader(fileReader);
+            c = bufferedReader.readLine();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return c;
     }
 
 }

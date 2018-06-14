@@ -14,10 +14,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.Writer;
-import java.util.Iterator;
-import java.util.Random;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -29,8 +26,8 @@ import java.util.concurrent.TimeUnit;
 public class CreateCookieService {
 
 
-    public void login(String username, String password) throws Exception {
-        System.setProperty("webdriver.chrome.driver", "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.bak");
+    public Map<String, String> login(String username, String password) throws Exception {
+        System.setProperty("webdriver.chrome.driver", "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().pageLoadTimeout(12000, TimeUnit.SECONDS);
         Selenium selenium = new WebDriverBackedSelenium(driver, "http://zjjzzgl.zjsgat.gov.cn:9090");
@@ -94,16 +91,22 @@ public class CreateCookieService {
         sb.append(jcsid.toString()).append(";").append(jsessionid.toString()).append("_version_key=3301;");
         System.out.println(sb.toString());
         // 保存到文件
-        Writer out = new FileWriter(new File("D://vcode//cookie//c.txt"));
+        Writer out = new FileWriter(new File("D://vcode//cookie//" + username + ".txt"));
         out.write(sb.toString());
         out.close();
         driver.close();
+
+        Map<String, String> map = new HashMap<>();
+        map.put("png", name);
+        map.put("cookiefilepath", username + ".txt");
+        return map;
+
     }
 
     private String createPngName() {
         Random random = new Random();
         StringBuffer sf = new StringBuffer();
-        sf.append("D:/vcode/test.png/");
+        sf.append("D:/vcode/png/");
         sf.append(System.currentTimeMillis());
         sf.append(random.nextInt());
         sf.append(".png");
