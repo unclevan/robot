@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="issues">
+    <option name="index">
+      <map>
+        <entry key="/Dummy.txt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="/a.dummy">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/README.md">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/robot.iml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/hoho/robot/Dto/Area.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/hoho/robot/Dto/Province.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/hoho/robot/RobotApplication.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/hoho/robot/cfg/SwaggerConfig.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/hoho/robot/service/CreateCookieService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/hoho/robot/service/KeepConnectionAliveTask.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/hoho/robot/service/SubmitService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/hoho/robot/util/VercodeUtil.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/hoho/robot/web/LoginController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/hoho/robot/web/SubmitController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/new_wk/demo/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/new_wk/demo/src/main/java/com/example/demo/robot/Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/new_wk/demo/src/main/java/com/example/demo/robot/TestChrome.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/new_wk/joyo-duoduo/src/main/java/com/joyowo/duoduo/entity/JdOrderAttInfo.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/new_wk/joyo-duoduo/src/main/java/com/joyowo/duoduo/service/logic/OrderService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/new_wk/joyo-duoduo/src/main/java/com/joyowo/duoduo/service/logic/WagesBillQueryService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/new_wk/joyo-duoduo/src/main/java/com/joyowo/duoduo/web/http/OrderController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/new_wk/joyo-duoduo/src/main/java/com/joyowo/duoduo/web/http/TestController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/new_wk/joyo-sp-pleasepay/src/main/java/com/joyowo/ppay/task/UserTask.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

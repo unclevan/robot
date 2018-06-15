@@ -73,4 +73,34 @@ public class SubmitController {
         }
         return map;
     }
+
+    @PostMapping(value = "/queryPc")
+    @ApiOperation(value = "查询行政区划信息", httpMethod = "POST", response = Map.class)
+    public Map queryPc() {
+        return submitService.ssxqSelector();
+    }
+
+    @PostMapping(value = "/queryCity")
+    @ApiOperation(value = "查询行政区划信息", httpMethod = "POST", response = Map.class)
+    public String queryCity(@ApiParam(value = "value") @RequestParam(name = "value", required = false) String value) {
+        try {
+            submitService.ds(value);
+            return "ok";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "error";
+    }
+
+    @PostMapping(value = "/queryQx")
+    @ApiOperation(value = "查询行政区划信息", httpMethod = "POST", response = Map.class)
+    public String queryQx(@ApiParam(value = "value") @RequestParam(name = "value", required = false) String value) {
+        try {
+            submitService.qx();
+            return "ok";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "error";
+    }
 }
