@@ -71,9 +71,17 @@ public class CreateCookieService {
         loginBtn.click();
         WebElement userInfo = driver.findElement(By.xpath("/html/body/div[1]/div[1]/div/ul/li[2]/a"));
         if (userInfo == null || !"我的信息".equals(userInfo.getText()) || !"a".equals(userInfo.getTagName())) {
-            WebElement errorInfo = driver.findElement(By.xpath("//*[@id=\"loginForm\"]/div/div[1]/span"));
-            throw new Exception("登录失败!" + errorInfo.getText());
+            try {
+                WebElement errorInfo = driver.findElement(By.xpath("//*[@id=\"loginForm\"]/div/div[1]/span"));
+                throw new Exception("登录失败!" + errorInfo.getText());
+            } finally {
+                try {
+                    driver.quit();
+                    driver.close();
+                }catch (Exception e){
 
+                }
+            }
         }
         driver.manage().getCookies();
         Set<Cookie> cookies = driver.manage().getCookies();
