@@ -6,15 +6,19 @@ import com.thoughtworks.selenium.webdriven.WebDriverBackedSelenium;
 import org.apache.commons.io.FileUtils;
 import org.apache.http.client.CookieStore;
 import org.apache.http.impl.client.BasicCookieStore;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.Writer;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -62,7 +66,37 @@ public class CreateCookieService {
         //TODO 这里是模拟人工识别测试,该处需要调用识别工具对文件进行识别
 //        Scanner in = new Scanner(System.in);
 //        String captcha = in.nextLine();
-        String captcha = VercodeUtil.crackVercode(screenshotLocation);
+        //手动下载一个试试
+
+
+        driver.manage().getCookies();
+        Set<Cookie> cookies1 = driver.manage().getCookies();
+        System.out.println("cookie: " + cookies1);
+        Iterator<Cookie> itr1 = cookies1.iterator();
+        StringBuffer jcsid1 = new StringBuffer();
+        StringBuffer jsessionid1 = new StringBuffer();
+        while (itr1.hasNext()) {
+            Cookie cookie = itr1.next();
+            String str = cookie.toString();
+            String[] arr = str.split(";");
+            for (int i = 0; i < arr.length; i++) {
+                String[] srr = arr[i].split("=");
+                if (srr[0].equals("jcsid")) {
+                    jcsid1.append("jcsid=").append(srr[1]);
+                }
+                if (srr[0].equals("JSESSIONID")) {
+                    jsessionid1.append("JSESSIONID=").append(srr[1]);
+                }
+            }
+        }
+        StringBuffer sb1 = new StringBuffer();
+        sb1.append(jcsid1.toString()).append(";").append(jsessionid1.toString()).append("_version_key=3301;");
+        System.out.println(sb1.toString());
+
+        download("http://zjjzzgl.zjsgat.gov.cn:9090/captcha.jpg", "D://vcode//c.png", sb1.toString());
+
+
+        String captcha = VercodeUtil.crackVercode(new File("D://vcode//c.png"));
         System.out.println("captcha:" + captcha);
         vcodeInput.sendKeys(captcha);
 
@@ -78,7 +112,7 @@ public class CreateCookieService {
                 try {
                     driver.quit();
                     driver.close();
-                }catch (Exception e){
+                } catch (Exception e) {
 
                 }
             }
@@ -87,7 +121,6 @@ public class CreateCookieService {
         Set<Cookie> cookies = driver.manage().getCookies();
         System.out.println("cookie: " + cookies);
         Iterator<Cookie> itr = cookies.iterator();
-        CookieStore cookieStore = new BasicCookieStore();
         StringBuffer jcsid = new StringBuffer();
         StringBuffer jsessionid = new StringBuffer();
         while (itr.hasNext()) {
@@ -130,5 +163,28 @@ public class CreateCookieService {
         return sf.toString();
     }
 
+
+    public static void download(String urlString, String filename, String cookie) throws Exception {
+        // 构造URL
+        URL url = new URL(urlString);
+        // 打开连接
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestProperty("Cookie", cookie);
+        // 输入流
+        InputStream is = con.getInputStream();
+        // 1K的数据缓冲
+        byte[] bs = new byte[1024];
+        // 读取到的数据长度
+        int len;
+        // 输出的文件流
+        OutputStream os = new FileOutputStream(filename);
+        // 开始读取
+        while ((len = is.read(bs)) != -1) {
+            os.write(bs, 0, len);
+        }
+        // 完毕，关闭所有链接
+        os.close();
+        is.close();
+    }
 
 }
